@@ -1,1 +1,1 @@
-A script that lists all file names and in a specific directory  
+Write a script that prints a file in a directory   
