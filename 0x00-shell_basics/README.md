@@ -1,1 +1,1 @@
-A script that creates multiple directories :  
+A command list that is specific 
