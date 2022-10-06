@@ -1,1 +1,1 @@
-A script that sets permission to other users,not owner or groups 
+A script that sets the mode  
