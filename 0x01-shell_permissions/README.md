@@ -1,1 +1,1 @@
-A script that sets the mode file to the same at another file mode   
+A script that adds execute permissions to all subdirectories  for the owner,group owner and all users   
