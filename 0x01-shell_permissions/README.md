@@ -1,1 +1,1 @@
-A script that will play StarWars IV episode in terminal  
+A script that changes owner only if owned by a specific user   
