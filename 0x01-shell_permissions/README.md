@@ -1,1 +1,1 @@
-A script that changes group owner for a file 
+A script that will play StarWars IV episode in terminal  
