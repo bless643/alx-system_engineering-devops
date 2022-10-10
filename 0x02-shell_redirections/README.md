@@ -1,1 +1,1 @@
-A script that displays content of the /ect/passwd file 
+A script that displays content of the /ect/passwd and /ect/hosts 
