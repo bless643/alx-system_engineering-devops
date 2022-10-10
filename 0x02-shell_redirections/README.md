@@ -1,1 +1,1 @@
-A script that creats a file containing the text Best School   
+Write a script that displays a confused smiley "(Ôo)'.
