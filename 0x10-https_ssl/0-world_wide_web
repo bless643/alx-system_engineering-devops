@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 // This script displays information about subdomains of a given domain
 
-// Get the domain and subdomain (if provided) from the user input
 domain=$1
 subdomain=$2
 
-/*Set the subdomains to check for*/
+
 subdomains=("www" "lb-01" "web-01" "web-02")
 
 // If a subdomain is provided, only check that one
