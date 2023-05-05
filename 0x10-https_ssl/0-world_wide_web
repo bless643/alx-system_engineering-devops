@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# This script displays information about subdomains of a given domain
+// This script displays information about subdomains of a given domain
 
-# Get the domain and subdomain (if provided) from the user input
+// Get the domain and subdomain (if provided) from the user input
 domain=$1
 subdomain=$2
 
-# Set the subdomains to check for
+/*Set the subdomains to check for*/
 subdomains=("www" "lb-01" "web-01" "web-02")
 
-# If a subdomain is provided, only check that one
+// If a subdomain is provided, only check that one
 if [[ ! -z $subdomain ]]; then
   subdomains=($subdomain)
 fi
 
-# Loop through the subdomains and get their DNS information
+// Loop through the subdomains and get their DNS information
 for sub in "${subdomains[@]}"; do
   dns_info=$(dig +short $sub.$domain | awk '{printf "%-30s %-10s %-15s\n", "'"$sub.$domain"'", $1, $2}')
   if [[ ! -z $dns_info ]]; then
