@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-// This script displays information about subdomains of a given domain
+# Usage: ./1-world_wide_web <domain> <subdomain>
+# Display information about subdomains.
 
 domain=$1
 subdomain=$2
@@ -7,15 +8,13 @@ subdomain=$2
 
 subdomains=("www" "lb-01" "web-01" "web-02")
 
-// If a subdomain is provided, only check that one
 if [[ ! -z $subdomain ]]; then
   subdomains=($subdomain)
 fi
 
-// Loop through the subdomains and get their DNS information
+
 for sub in "${subdomains[@]}"; do
   dns_info=$(dig +short $sub.$domain | awk '{printf "%-30s %-10s %-15s\n", "'"$sub.$domain"'", $1, $2}')
   if [[ ! -z $dns_info ]]; then
     echo "The subdomain $dns_info"
   fi
-done
