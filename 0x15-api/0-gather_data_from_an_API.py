@@ -9,8 +9,6 @@ Usage: python3 0-gather_data_from_an_API.py <employee_id>
 Arguments:
     <employee_id>: An integer representing the ID of the employee
 
-The script makes API requests to retrieve user and TODO list data for the specified employee ID. It then extracts the relevant information and displays the progress of completed tasks.
-
 Dependencies:
     - requests module
 
@@ -25,39 +23,60 @@ import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-if len(sys.argv) != 2 or not sys.argv[1].isdigit():
-    print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
-    sys.exit(1)
 
-employee_id = int(sys.argv[1])
+def retrieve_employee_data(employee_id):
+    """
+    Retrieve employee data from the API
 
-# Make the API request
-response_user = requests.get(f"https://jsonplaceholder.typicode.com/users/{employee_id}", verify=False)
-response_todos = requests.get(f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}", verify=False)
+    Args:
+        employee_id (int): The ID of the employee
 
-# Check if the API requests were successful
-if response_user.status_code != 200:
-    print(f"Error: Unable to retrieve user data for employee ID {employee_id}")
-    sys.exit(1)
+    Returns:
+        tuple: A tuple containing the user data and the TODO list data
+    """
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    todos_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
 
-if response_todos.status_code != 200:
-    print(f"Error: Unable to retrieve TODO list data for employee ID {employee_id}")
-    sys.exit(1)
+    user_response = requests.get(user_url, verify=False)
+    todos_response = requests.get(todos_url, verify=False)
 
-# Extract relevant information from the API responses
-user_data = response_user.json()
-todos_data = response_todos.json()
+    if user_response.status_code != 200:
+        print(f"Error: Unable to retrieve user data for employee ID {employee_id}")
+        sys.exit(1)
 
-# Get user details
-employee_name = user_data.get("name")
-employee_username = user_data.get("username")
+    if todos_response.status_code != 200:
+        print(f"Error: Unable to retrieve TODO list data for employee ID {employee_id}")
+        sys.exit(1)
 
-# Get TODO list progress
-total_tasks = len(todos_data)
-done_tasks = sum(1 for todo in todos_data if todo.get("completed"))
+    user_data = user_response.json()
+    todos_data = todos_response.json()
 
-# Display the TODO list progress
-print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
-for todo in todos_data:
-    if todo.get("completed"):
-        print("\t", todo.get("title"))
+    return user_data, todos_data
+
+
+def display_todo_list_progress(user_data, todos_data):
+    """
+    Display the employee's TODO list progress
+
+    Args:
+        user_data (dict): User data retrieved from the API
+        todos_data (list): TODO list data retrieved from the API
+    """
+    employee_name = user_data.get("name")
+    total_tasks = len(todos_data)
+    done_tasks = sum(1 for todo in todos_data if todo.get("completed"))
+
+    print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
+    for todo in todos_data:
+        if todo.get("completed"):
+            print("\t", todo.get("title"))
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2 or not sys.argv[1].isdigit():
+        print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
+        sys.exit(1)
+
+    employee_id = int(sys.argv[1])
+    user_data, todos_data = retrieve_employee_data(employee_id)
+    display_todo_list_progress(user_data, todos_data)
