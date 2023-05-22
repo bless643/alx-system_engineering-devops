@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """
 0-gather_data_from_an_API.py
 ---------------------------
@@ -69,3 +68,4 @@ if __name__ == "__main__":
     else:
         employee_id = int(argv[1])
         fetch_data(employee_id)
+
