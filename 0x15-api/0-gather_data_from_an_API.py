@@ -9,12 +9,7 @@ Usage: python3 0-gather_data_from_an_API.py <employee_id>
 Arguments:
     <employee_id>: An integer representing the ID of the employee
 
-The script makes API requests to retrieve user and TODO list data for the specified employee ID. It then extracts the relevant information and displays the progress of completed tasks in the following format:
-
-Employee [EMPLOYEE_NAME] is done with tasks([NUMBER_OF_DONE_TASKS]/[TOTAL_NUMBER_OF_TASKS]):
-    [TASK_TITLE]
-    [TASK_TITLE]
-    ...
+The script makes API requests to retrieve user and TODO list data for the specified employee ID. It then extracts the relevant information and displays the progress of completed tasks.
 
 Dependencies:
     - requests module
