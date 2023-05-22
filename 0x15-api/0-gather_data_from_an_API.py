@@ -19,7 +19,6 @@ API endpoints used:
 
 import requests
 import sys
-import urllib3
 
 
 def gather_data(employee_id):
@@ -30,19 +29,16 @@ def gather_data(employee_id):
         employee_id (int): The ID of the employee
     """
 
-    # Disable SSL verification warning
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
     # Get user data
     user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
 
     try:
-        user_response = requests.get(user_url, verify=False)
+        user_response = requests.get(user_url)
         user_data = user_response.json()
         username = user_data.get("name")
 
-        todo_response = requests.get(todo_url, verify=False)
+        todo_response = requests.get(todo_url)
         todo_data = todo_response.json()
 
         total_tasks = len(todo_data)
