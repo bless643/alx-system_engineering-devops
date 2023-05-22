@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 
+"""
+0-gather_data_from_an_API.py
+Gathers information about an employee's TODO list progress from an API.
+"""
+
 import requests
 import sys
 import urllib3
